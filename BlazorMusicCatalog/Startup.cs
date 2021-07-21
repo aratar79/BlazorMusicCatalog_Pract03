@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,6 +30,11 @@ namespace BlazorMusicCatalog
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+
+            services.AddDbContext<ApplicationDbContext>(options => 
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), 
+                new MySqlServerVersion(new Version(10, 5, 11))));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
