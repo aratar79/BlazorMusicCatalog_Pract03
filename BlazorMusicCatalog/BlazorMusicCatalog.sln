@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorMusicCatalog.Data", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorMusicCatalog.Models", "..\BlazorMusicCatalog.Models\BlazorMusicCatalog.Models.csproj", "{19716463-8AE4-44D5-8E20-BDBCC3120C1B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorMusicCatalog.Services", "..\BlazorMusicCatalog.Services\BlazorMusicCatalog.Services.csproj", "{FBDCE922-6D21-415C-ACF5-D9B5C55C5CE2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{19716463-8AE4-44D5-8E20-BDBCC3120C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{19716463-8AE4-44D5-8E20-BDBCC3120C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{19716463-8AE4-44D5-8E20-BDBCC3120C1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBDCE922-6D21-415C-ACF5-D9B5C55C5CE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBDCE922-6D21-415C-ACF5-D9B5C55C5CE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBDCE922-6D21-415C-ACF5-D9B5C55C5CE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBDCE922-6D21-415C-ACF5-D9B5C55C5CE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
