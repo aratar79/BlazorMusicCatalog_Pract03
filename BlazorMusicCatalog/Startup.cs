@@ -1,4 +1,6 @@
 using BlazorMusicCatalog.Data;
+using BlazorMusicCatalog.Services.classes;
+using BlazorMusicCatalog.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +37,7 @@ namespace BlazorMusicCatalog
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"), 
                 new MySqlServerVersion(new Version(10, 5, 11))));
 
+            services.AddScoped<IAlbumService, AlbumService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BlazorMusicCatalog.Data\BlazorMusicCatalog.Data.csproj" />
     <ProjectReference Include="..\BlazorMusicCatalog.Models\BlazorMusicCatalog.Models.csproj" />
+    <ProjectReference Include="..\BlazorMusicCatalog.Services\BlazorMusicCatalog.Services.csproj" />
   </ItemGroup>
 
 </Project>
