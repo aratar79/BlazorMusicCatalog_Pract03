@@ -71,6 +71,9 @@ namespace BlazorMusicCatalog.Data.Migrations
                         .IsUnicode(true)
                         .HasColumnType("varchar(120)");
 
+                    b.Property<int>("Number")
+                        .HasColumnType("int");
+
                     b.Property<string>("Path")
                         .HasMaxLength(500)
                         .IsUnicode(true)
