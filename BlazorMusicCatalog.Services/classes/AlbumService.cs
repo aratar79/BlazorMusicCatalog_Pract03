@@ -31,9 +31,9 @@ namespace BlazorMusicCatalog.Services.classes
                 .FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Album>> GetAlbums()
+        public async Task<IEnumerable<Album>> GetAlbums()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Albums.ToListAsync();
         }
 
         public async Task<bool> InsertAlbum(Album album)
