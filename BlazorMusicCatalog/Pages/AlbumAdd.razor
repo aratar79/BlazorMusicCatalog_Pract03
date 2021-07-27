@@ -1,4 +1,5 @@
 ﻿@page "/albumadd"
+@page "/albumadd/{id:int}"
 @inject NavigationManager NavigationManager
 @inject IAlbumService AlbumService
 
@@ -37,15 +38,23 @@ else
 
         @foreach (var song in album.Songs)
         {
-            <SongBlock Song="song" OnSongChanged="UpdateAddedSong"></SongBlock>
+            <SongBlock Song="song" OnSongChanged="UpdateAddedSong" OnSongRemoved="RemoveSong"></SongBlock>
         }
 
         <table class="table">
             <tr>
-                <td colspan="2" style="text-align:center">
-                    <input type="submit" value="Save" @onclick="AlbumSave" />
-                    <input type="submit" value="Cancel" @onclick="Cancel" />
+                <td colspan="2" class="text-center">
+                    <input type="submit" class="btn btn-success" value="Save" @onclick="AlbumSave" />
                 </td>
+                <td class="text-center">
+                    <input type="submit" class="btn btn-secondary" value="Cancel" @onclick="Cancel" />
+                </td>
+                @if (id > 0)
+                {
+                    <td class="text-center">
+                        <input type="submit" class="btn btn-danger" value="Remove" @onclick="AlbumRemove" />
+                    </td>
+                }
             </tr>
         </table>
 
@@ -55,13 +64,31 @@ else
 }
 
 @code {
-    public Album album = new Album { ReleaseDate = DateTime.Now, Songs = new List<Song>() };
+
+    [Parameter]
+    public int id { get; set; }
+
+    public Album album;
 
     protected override async Task OnInitializedAsync()
     {
         try
         {
-            album.Songs.Add(new Song() { Number = album.Songs.Count + 1 });
+            if (id > 0)
+            {
+                album = await AlbumService.GetAlbumDetails(id);
+            }
+            else
+            {
+                Album album = new Album()
+                {
+                    ReleaseDate = DateTime.Now,
+                    Songs = new List<Song>()
+                };
+                album.Songs.Add(new Song() { Number = album.Songs.Count + 1 });
+            }
+
+
         }
         catch (Exception)
         {
@@ -75,6 +102,11 @@ else
         album.Songs.Add(new Song() { Number = album.Songs.Count + 1 });
     }
 
+    protected async Task AlbumRemove()
+    {
+        await AlbumService.DeleteAlbum(album);
+    }
+
     public async void UpdateAddedSong(Song song)
     {
         var songToUpdate = album.Songs.FirstOrDefault(s => s.Number == song.Number);
@@ -84,6 +116,12 @@ else
             songToUpdate.Name = song.Name;
             songToUpdate.Path = song.Path;
         }
+    }
+
+    protected void RemoveSong(Song song)
+    {
+        var sonToRemove = album.Songs.FirstOrDefault(s => s.Number == song.Number);
+        album.Songs.Remove(sonToRemove);
     }
 
     async Task LoadAlbumCover(InputFileChangeEventArgs e)
@@ -100,7 +138,11 @@ else
 
     protected async Task AlbumSave()
     {
-        await AlbumService.InsertAlbum(album);
+        if (id > 0)
+            await AlbumService.UpdateAlbum(album);
+        else
+            await AlbumService.InsertAlbum(album);
+        NavigateToHome();
     }
 
     public void Cancel()

@@ -18,9 +18,10 @@ namespace BlazorMusicCatalog.Services.classes
         {
             _dbContext = dbContext;
         }
-        public Task<bool> DeleteAlbum(Album album)
+        public async Task<bool> DeleteAlbum(Album album)
         {
-            throw new NotImplementedException();
+            _dbContext.Remove(album);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
 
         public async Task<Album> GetAlbumDetails(int id)
@@ -42,9 +43,10 @@ namespace BlazorMusicCatalog.Services.classes
             return await _dbContext.SaveChangesAsync() > 0;
         }
 
-        public Task<bool> UpdateAlbum(Album album)
+        public async Task<bool> UpdateAlbum(Album album)
         {
-            throw new NotImplementedException();
+            _dbContext.Update(album);
+            return await _dbContext.SaveChangesAsync() > 0;
         }
     }
 }
